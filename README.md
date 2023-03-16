@@ -1,2 +1,1 @@
-# alx-low_level_programming
-repo for C tutorial
+in this repo we're gonna work on C project from Alx program
