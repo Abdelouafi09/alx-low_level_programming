@@ -7,7 +7,7 @@
  *
  * @n: character given to the function
  */
-int print_sign(int n)
+int print_last_digit(int n)
 {
 	int r;
 
