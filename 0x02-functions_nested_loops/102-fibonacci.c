@@ -6,7 +6,8 @@
  */
 int main(void)
 {
-	int i, fb1, fb2, s;
+	int i;
+	unsigned long int fb1, fb2, s;
 
 	fb1 = 0;
 	fb2 = 1;
@@ -16,9 +17,9 @@ int main(void)
 		fb1 = fb2;
 		fb2 = s;
 		if (i == 0)
-			printf("%d", s);
+			printf("%lu", s);
 		else
-			printf(", %d", s);
+			printf(", %lu", s);
 	}
 	printf("\n");
 	return (0);
