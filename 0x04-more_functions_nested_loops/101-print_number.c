@@ -17,11 +17,12 @@ void print_number(int n)
 	{
 		div *= 10;
 	}
-	while (div > 0)
+	while (div >= 10)
 	{
 		d = n / div;
 		_putchar(d + '0');
 		n -= d * div;
 		div /= 10;
 	}
+	_putchar(n % 10 + '0');
 }
