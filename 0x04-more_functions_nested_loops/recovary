@@ -5,14 +5,22 @@
  */
 void print_number(int n)
 {
+	int div, d;
+
 	if (n < 0)
 	{
-		n = -n;
 		_putchar('-');
+		n = -n;
 	}
-	if (n / 10)
+	while (n / div >= 10)
 	{
-		print_number(n / 10);
+		div *= 10;
 	}
-	_putchar(n % 10 +'0');
+	while (div > 0)
+	{
+		d = n / div;
+		_putchar(d + '0');
+		n -= d * div;
+		div /= 10;
+	}
 }
