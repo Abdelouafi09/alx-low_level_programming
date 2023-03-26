@@ -7,7 +7,7 @@
 int main(void)
 {
 	int i;
-	unsigned long int fb1, fb2, s;
+	unsigned int fb1, fb2, s;
 
 	fb1 = 1;
 	fb2 = 2;
