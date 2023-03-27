@@ -1,8 +1,8 @@
 #include "main.h"
-#include <string.h>
 /**
  * _strlen - display length
  * @s: char to operate on
+ * Return: return an int
  */
 int _strlen(char *s)
 {
@@ -15,4 +15,3 @@ int _strlen(char *s)
 	}
 	return (len);
 }
-
