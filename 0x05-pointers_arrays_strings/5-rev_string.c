@@ -6,11 +6,11 @@
  */
 void rev_string(char *s)
 {
-	int len, i;
-	char a;
+	/**char a;
+	int len, i;*/
 
-	len = _strlen(s);
-	for (i = 0; i < len; i++)
+	printf("%d", _strlen(s));
+	/**for (i = 0; i < len; i++)
 	{
 		*(&a + i) = *s;
 		s++;
@@ -21,5 +21,5 @@ void rev_string(char *s)
 		*s = *(&a + len);
 		s++;
 		len--;
-	}
+	}*/
 }
