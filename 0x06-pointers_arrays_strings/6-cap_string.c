@@ -5,22 +5,32 @@
  * @str: string
  * Return: string result
  */
-char *cap_string(char *str)
+char *cap_string(char *s)
 {
-	int i;
+	int i, j;
+	char sep[] = {' ', '"', ',', ';', '.', '!', '?', '\n', '\t', '(', ')', '{', '}'};
 
 	i = 0;
-	while (str[i])
+	while (*(s + i) != '\0')
 	{
-		while (!(str[i] <= 'z' && str[i] >= 'a'))
-			i++;
-		if (str[i - 1] == ' ' || str[i - 1] == ','
-				|| str[i - 1] == ';' || str[i - 1] == '.'
-				|| str[i - 1] == '?' || str[i - 1] == '!' || str[i - 1] == '"'
-				|| str[i - 1] == '(' || str[i - 1] == ')' || str[i - 1] == '{'
-				|| str[i - 1] == '}' || str[i - 1] == '\t' || str[i - 1] == '\n')
-			str[i] = str[i] - 32;
+		if (*(s + i) >= 'a' && *(s + i) <= 'z')
+		{
+			if (i == 0)
+			{
+				*(s + i) = *(s + i) - 'a' + 'A';
+			}
+			else
+			{
+				for (j = 0; j <= 12; j++)
+				{
+					if (sep[j] == *(s + i - 1))
+					{
+						*(s + i) = *(s + i) - 'a' + 'A';
+					}
+				}
+			}
+		}
 		i++;
 	}
-	return (str);
+	return (s);
 }
