@@ -1,5 +1,4 @@
 #include "main.h"
-#include <ctype.h>
 
 /**
  * cap_string - uppercase the first char in every word
@@ -8,25 +7,16 @@
  */
 char *cap_string(char *str)
 {
-	int cap = 1;
-	char *p = str;
+	int i;
 
-	while (*p != '\0')
+	i = 0;
+	while (str[i])
 	{
-		if (isspace(*p) || ispunct(*p))
-		{
-			cap = 1;
-		}
-		else
-			if (cap)
-			{
-				if (*p <= 'z' && *p >= 'a')
-				{
-					*p = *p - 'a' + 'A';
-				}
-				cap = 0;
-			}
-		p++;
+		while (!(str[i] <= 'z' && str[i] >= 'a'))
+			i++;
+		if (str[i - 1] == ' ' || str[i - 1] == ',' || str[i - 1] == ';' || str[i - 1] == '.' || str[i - 1] == '?' || str[i - 1] == '!' || str[i - 1] == '"' || str[i - 1] == '(' || str[i - 1] == ')' || str[i - 1] == '{' || str[i - 1] == '}' || str[i - 1] == '\t' || str[i - 1] == '\n')
+			str[i] = str[i] - 32;
+		i++;
 	}
 	return (str);
 }
