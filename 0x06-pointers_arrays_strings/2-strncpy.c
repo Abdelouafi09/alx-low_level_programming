@@ -5,6 +5,7 @@
  * @dest: string copied
  * @src: string to copy
  * @n: length of src
+ * Return: dest (copied string)
  */
 char *_strncpy(char *dest, char *src, int n)
 {
