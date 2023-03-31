@@ -2,13 +2,14 @@
 
 /**
  * cap_string - uppercase the first char in every word
- * @str: string
+ * @s: string
  * Return: string result
  */
 char *cap_string(char *s)
 {
 	int i, j;
-	char sep[] = {' ', '"', ',', ';', '.', '!', '?', '\n', '\t', '(', ')', '{', '}'};
+	char sep[] = {' ', '"', ',', ';', '.', '!',
+		'?', '\n', '\t', '(', ')', '{', '}'};
 
 	i = 0;
 	while (*(s + i) != '\0')
