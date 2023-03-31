@@ -8,19 +8,23 @@
  */
 char *cap_string(char *str)
 {
-	int capitalize_next = 1;
+	int cap = 1;
 	char *p = str;
+
 	while (*p != '\0')
 	{
 		if (isspace(*p) || ispunct(*p))
 		{
-			capitalize_next = 1;
+			cap = 1;
 		}
-		else 
-			if (capitalize_next)
+		else
+			if (cap)
 			{
-				*p = toupper(*p);
-				capitalize_next = 0;
+				if (*p <= 'z' && *p >= 'a')
+				{
+					*p = *p - 'a' + 'A';
+				}
+				cap = 0;
 			}
 		p++;
 	}
