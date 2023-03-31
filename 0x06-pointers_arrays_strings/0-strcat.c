@@ -4,6 +4,8 @@
  * _strcat - concatinate string
  * @dest: string to add to
  * @src: string to add
+ * Return: return dest string containe both strings
+ *
  */
 char *_strcat(char *dest, char *src)
 {
