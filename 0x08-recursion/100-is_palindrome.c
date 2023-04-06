@@ -1,6 +1,6 @@
 #include "main.h"
 
-int check(char *s, int i, int len);
+int pal(char *s, int i, int len);
 int _strlen(char *s);
 
 /**
