@@ -1,0 +1,6 @@
+#ifndef ZERO_MINUS_OBJECT_LIKE_MACRO_H
+#define ZERO_MINUS_OBJECT_LIKE_MACRO_H
+
+#define SIZE 1024
+
+#endif
