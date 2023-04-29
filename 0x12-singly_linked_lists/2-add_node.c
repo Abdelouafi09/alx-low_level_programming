@@ -1,9 +1,9 @@
 #include "lists.h"
 /**
- * add_node _ add new element to the beginning of the list
+ * add_node - add new element to the beginning of the list
  * @head: adress of the head of list
  * @str: string to add to list
- *
+ * Return: the adresse of the new element
  */
 list_t *add_node(list_t **head, const char *str)
 {
@@ -14,7 +14,7 @@ list_t *add_node(list_t **head, const char *str)
 		return (NULL);
 	new->str = strdup(str);
 	new->len = strlen(str);
-	if(*head)
+	if (*head)
 		new->next = *head;
 	else
 		new->next = NULL;
