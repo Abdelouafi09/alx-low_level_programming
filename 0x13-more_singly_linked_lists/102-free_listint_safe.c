@@ -1,50 +1,95 @@
 #include "lists.h"
-#include <stdio.h>
-#include <stdlib.h>
+
+size_t count_loop_listint(listint_t *head);
+size_t free_listint_safe(listint_t **h);
 
 /**
- * free_listint_safe - Frees a listint_t list.
- * @head: A pointer to the head of the listint_t list.
+ * count_loop_listint - Counts the number of unique nodes
+ *                      in a looped listint_t linked list.
+ * @head: A pointer to the head of the listint_t to check.
  *
- * Return: The size of the list that was free'd.
+ * Return: If the list is not looped - 0.
+ *         Otherwise - the number of unique nodes in the list.
  */
-size_t free_listint_safe(listint_t **head)
+size_t count_loop_listint(listint_t *head)
 {
-	size_t count = 0, i = 0;
-	listint_t *current, *tmp;
-	int loop_detected = 0;
+	listint_t *slow, *fast;
+	size_t count = 1;
 
-	if (head == NULL || *head == NULL)
+	if (head == NULL || head->next == NULL)
 		return (0);
 
-	current = *head;
+	slow = head->next;
+	fast = (head->next)->next;
 
-	while (current != NULL)
+	while (fast)
 	{
-		count++;
-		if (current->next >= current)
+		if (slow == fast)
 		{
-			loop_detected = 1;
-			break;
+			slow = head;
+			while (slow != fast)
+			{
+				count++;
+				slow = slow->next;
+				fast = fast->next;
+			}
+
+			slow = slow->next;
+			while (slow != fast)
+			{
+				count++;
+				slow = slow->next;
+			}
+
+			return (count);
 		}
-		tmp = current;
-		current = current->next;
-		free(tmp);
+
+		slow = slow->next;
+		fast = (fast->next)->next;
 	}
 
-	if (loop_detected)
+	return (0);
+}
+
+/**
+ * free_listint_safe - Frees a listint_t list safely (i.e.
+ *                     can free lists containing loops)
+ * @h: A pointer to the address of
+ *     the head of the listint_t list.
+ *
+ * Return: The size of the list that was freed.
+ *
+ * Description: The function sets the head to NULL.
+ */
+size_t free_listint_safe(listint_t **h)
+{
+	listint_t *temp;
+	size_t count, index;
+
+	count = count_loop_listint(*h);
+
+	if (count == 0)
 	{
-		current = *head;
-		for (i = 0; i < count - 1; i++)
+		for (; h != NULL && *h != NULL; count++)
 		{
-			tmp = current;
-			current = current->next;
-			free(tmp);
+			temp = (*h)->next;
+			free(*h);
+			*h = temp;
 		}
-		free(current);
+	}
+	else
+	{
+		for (index = 0; index < count; index++)
+		{
+			temp = (*h)->next;
+			free(*h);
+			*h = temp;
+		}
+
+		*h = NULL;
 	}
 
-	*head = NULL;
+	h = NULL;
 
 	return (count);
 }
