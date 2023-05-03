@@ -1,41 +1,84 @@
 #include "lists.h"
 #include <stdio.h>
-size_t looped_listint_len(const listint_t *head);
+
 /**
- * print_listint_safe - Prints a listint_t list safely.
- * @head: A pointer to the head of the listint_t list.
+ * count_nodes_in_loop - Counts the number of unique nodes
+ *                       in a looped linked list.
+ * @head: A pointer to the head of the linked list to check.
  *
- * Return: The number of nodes in the list.
+ * Return: If the list is not looped - 0.
+ *         Otherwise - the number of unique nodes in the list.
+ */
+size_t count_nodes_in_loop(const listint_t *head)
+{
+	const listint_t *tortoise, *hare;
+	size_t count = 1;
+
+	if (head == NULL || head->next == NULL)
+		return (0);
+
+	tortoise = head->next;
+	hare = (head->next)->next;
+
+	while (hare)
+	{
+		if (tortoise == hare)
+		{
+			tortoise = head;
+			while (tortoise != hare)
+			{
+				count++;
+				tortoise = tortoise->next;
+				hare = hare->next;
+			}
+
+			tortoise = tortoise->next;
+			while (tortoise != hare)
+			{
+				count++;
+				tortoise = tortoise->next;
+			}
+
+			return (count);
+		}
+
+		tortoise = tortoise->next;
+		hare = (hare->next)->next;
+	}
+
+	return (0);
+}
+
+/**
+ * print_listint_safe - Prints a linked list safely.
+ * @head: A pointer to the head of the linked list.
+ *
+ * Return: The number of nodes in the linked list.
  */
 size_t print_listint_safe(const listint_t *head)
 {
-	size_t nodes, index = 0;
+	size_t count, index = 0;
 
-	/* Count the number of nodes in the list */
-	nodes = looped_listint_len(head);
+	count = count_nodes_in_loop(head);
 
-	/* If there is no loop, print the entire list */
-	if (nodes == 0)
+	if (count == 0)
 	{
-		for (; head != NULL; nodes++)
+		for (; head != NULL; count++)
 		{
 			printf("[%p] %d\n", (void *)head, head->n);
 			head = head->next;
 		}
 	}
-
-	/* If there is a loop, print the list up to the last node before the loop */
 	else
 	{
-		for (index = 0; index < nodes; index++)
+		for (index = 0; index < count; index++)
 		{
 			printf("[%p] %d\n", (void *)head, head->n);
 			head = head->next;
 		}
 
-		/* Print the last node before the loop */
 		printf("-> [%p] %d\n", (void *)head, head->n);
 	}
 
-	return (nodes);
+	return (count);
 }
