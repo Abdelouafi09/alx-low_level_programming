@@ -1,4 +1,4 @@
-:w#include "lists.h"
+#include "lists.h"
 size_t looped_listint_len(const listint_t *head)
 {
 	const listint_t *tortoise, *hare;

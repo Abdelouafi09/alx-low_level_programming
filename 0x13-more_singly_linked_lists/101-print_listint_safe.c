@@ -1,6 +1,6 @@
 #include "lists.h"
 #include <stdio.h>
-
+size_t looped_listint_len(const listint_t *head);
 /**
  * print_listint_safe - Prints a listint_t list safely.
  * @head: A pointer to the head of the listint_t list.
