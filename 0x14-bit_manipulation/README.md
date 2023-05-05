@@ -1,0 +1,1 @@
+first with bit manipulation
