@@ -5,13 +5,12 @@
  * @letters: number of letters wanted
  * Return: number of printed letters
  */
-
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	char buffer[1024];
-	ssize_t total_letters = 0;
-	ssize_t bytes_read;
 	int file_descriptor = open(filename, O_RDONLY);
+	ssize_t total_letters = 0;
+	char character;
+	ssize_t bytes_read;
 
 	if (filename == NULL)
 		return (0);
@@ -19,11 +18,11 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	if (file_descriptor == -1)
 		return (0);
 
-	while (letters > 0 &&
-			(bytes_read = read(file_descriptor, buffer, sizeof(buffer))) > 0)
+	while (letters > 0 && (bytes_read =
+				read(file_descriptor, &character,
+					sizeof(character))) > 0)
 	{
-		ssize_t bytes_to_write = (bytes_read < letters) ? bytes_read : letters;
-		ssize_t bytes_written = write(STDOUT_FILENO, buffer, bytes_to_write);
+		ssize_t bytes_written = write(STDOUT_FILENO, &character, sizeof(character));
 
 		if (bytes_written == -1)
 		{
@@ -32,7 +31,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
 		}
 
 		total_letters += bytes_written;
-		letters -= bytes_written;
+		letters--;
 
 		if (bytes_written < bytes_read)
 			break;
@@ -41,4 +40,3 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	close(file_descriptor);
 	return (total_letters);
 }
-
