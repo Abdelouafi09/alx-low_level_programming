@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * read_textfile - creates file and writes in it
+ * read_textfile - read from a file
  * @filename: the file pointer
  * @letters: the number of char to read from the file
  * Return: the number of read char
@@ -9,42 +9,37 @@
 ssize_t read_textfile(const char *filename, size_t letters)
 {
 	int fd;
-	ssize_t b_read, b_written;
-	char *buff;
+	ssize_t bytes_read, bytes_written;
+	char *buf;
 
 	if (filename == NULL)
 	{
 		return (0);
 	}
-	buff = malloc(letters);
-	if (buff == NULL)
+	buf = malloc(letters);
+	if (buf == NULL)
 	{
 		return (0);
 	}
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 	{
-		free(buff);
+		free(buf);
 		return (0);
 	}
-
-	b_read = read(fd, buff, letters);
-	if (b_read == -1)
+	bytes_read = read(fd, buf, letters);
+	if (bytes_read == -1)
 	{
-		free(buff);
+		free(buf);
 		close(fd);
 		return (0);
 	}
-
-	b_written = write(STDOUT_FILENO, buff, b_read);
-	if (b_written == -1 || b_written != b_read)
+	bytes_written = write(STDOUT_FILENO, buf, bytes_read);
+	if (bytes_written == -1)
 	{
-		free(buff);
-		close(fd);
+		write(STDOUT_FILENO, "bytes written error\n", 20);
 		return (0);
-	}
 
-	free(buff);
-	close(fd);
-	return (b_written);
+	}
+	return(bytes_written);
 }
